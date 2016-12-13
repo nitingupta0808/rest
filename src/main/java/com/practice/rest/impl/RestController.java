@@ -1,6 +1,12 @@
 package com.practice.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -10,16 +16,20 @@ import com.practice.service.api.IStudentService;
 import com.practice.service.impl.StudentService;
 
 
-public class RestController implements IRestController {
+@Path("/student")
+public class RestController {
 	
 	
 	private IStudentService studentService;
 
-	public List<Student> getAll(String name) {
-		if(StringUtils.isEmpty(name)){
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Student> getAll() {
+		if(StringUtils.isEmpty("")){
 			return getStudentService().findAll();
 		}else{
-			return getStudentService().findByName(name);	
+			return new ArrayList<>();
+			//return getStudentService().findByName(name);	
 		}
 	
 	}
